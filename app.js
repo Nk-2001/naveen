@@ -5,7 +5,7 @@ const PORT = 5000;
 const mongoose = require('mongoose');
 const {mongoUrl} = require('./key');
 const cors = require('cors');
-const {Jwt_secret} = require('../ProjectB/key');
+
 
 
 app.use(cors());
