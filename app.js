@@ -5,6 +5,10 @@ const PORT = 5000;
 const mongoose = require('mongoose');
 const {mongoUrl} = require('./key');
 const cors = require('cors');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5aa195a8de9bcf8b297ff04830d8abd01e6b7ccb
 
 
 app.use(cors());
