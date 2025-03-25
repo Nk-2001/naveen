@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = require("../models/model"); // Ensure this matches your model name
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const jwt= require('jsonwebtoken');
 const { Jwt_secret } = require('../key');
 const requireLogin = require('../middlewares/requireLogin');
@@ -25,7 +25,7 @@ router.post('/signup', async (req, res) => {
         if (savedUser) {
             return res.status(422).json({ error: "User already exists with that email or username" });
         }
-        const hashedPassword = await bcrypt.hash(password, 12);
+        const hashedPassword = await bcryptjs.hash(password, 12);
 
         const newUser = new User({
             name,
@@ -54,7 +54,7 @@ router.post("/signin", async (req, res) => {
         return res.status(422).json({ error: "Invalid Email or Password" })
     }
 
-    const match = await bcrypt.compare(password, savedUser.password)
+    const match = await bcryptjs.compare(password, savedUser.password)
     if (match) {
         // res.json({ message: "Successfully signed in" })
         const token= jwt.sign({_id:savedUser.id},Jwt_secret)

@@ -74,54 +74,6 @@ router.put('/unlike', requireLogin, async (req, res) => {
     }
   });
   
-
-// router.put("/comment", requireLogin, async (req, res) => {
-//   const comment = {
-//       comment: req.body.text,
-//       postedBy: req.user._id
-//   };
-
-//   try {
-//       const result = await Post.findByIdAndUpdate(
-//           req.body.postId,
-//           { $push: { comments: comment } },
-//           { new: true }
-//       )
-//       .populate("postedBy", "_id name photo")
-//       .populate("comment.postedBy", "_id name");
-//       console.log(result)
-//       res.json(result);
-//   } catch (err) {
-//       res.status(422).json({ error: err.message });
-//   }
-// });
-
-
-// router.put("/comment", requireLogin, async (req, res) => {
-//   const comment = {
-//     comment: req.body.text,
-//     postedBy: req.user._id,
-//   };
-
-//   try {
-//     const result = await Post.findByIdAndUpdate(
-//       req.body.postId,
-//       { $push: { comments: comment } },
-//       { new: true }
-//     )
-//       .populate("postedBy", "_id name photo")
-//       .populate("comments.postedBy", "_id name photo"); // ✅ FIXED HERE
-//     console.log(result)
-//     res.json(result);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(422).json({ error: err.message });
-//   }
-// });
-
-
-// routes/post.js (or wherever you handle post routes)
-
 router.post("/comment", requireLogin, async (req, res) => {
   const { text, postId } = req.body;
   if (!text?.trim()) return res.status(400).json({ error: "Comment cannot be empty" });
